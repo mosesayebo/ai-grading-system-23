@@ -8,6 +8,10 @@ import ExamsPage from './pages/Exams'
 import ResultsPage from './pages/Results'
 import UploadPage from './pages/Upload'
 import AiGrading from './pages/AiGrading'
+import AnalyticsPage from './pages/Analytics'
+import ReportsPage from './pages/Reports'
+import SettingsPage from './pages/Settings'
+import AboutPage from './pages/About'
 import Sidebar from './components/Sidebar'
 import Topbar from './components/Topbar'
 import './styles.css'
@@ -28,6 +32,10 @@ function App() {
               <Route path="/results" element={<ResultsPage />} />
               <Route path="/upload" element={<UploadPage />} />
               <Route path="/aigrading" element={<AiGrading />} />
+              <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="/reports" element={<ReportsPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/about" element={<AboutPage />} />
             </Routes>
           </main>
         </div>

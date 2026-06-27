@@ -1,0 +1,12 @@
+{
+  "name": "ai-grading-netlify",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm --prefix frontend install && npm --prefix frontend run build"
+  },
+  "dependencies": {
+    "@netlify/database": "^1.0.0"
+  }
+}

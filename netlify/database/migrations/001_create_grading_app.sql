@@ -1,0 +1,53 @@
+CREATE TABLE IF NOT EXISTS lecturers (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  department TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS students (
+  id SERIAL PRIMARY KEY,
+  matric TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  department TEXT NOT NULL,
+  email TEXT,
+  level TEXT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS courses (
+  id SERIAL PRIMARY KEY,
+  code TEXT UNIQUE NOT NULL,
+  title TEXT NOT NULL,
+  credits INTEGER NOT NULL DEFAULT 2,
+  lecturer_id INTEGER REFERENCES lecturers(id) ON DELETE SET NULL,
+  semester TEXT
+);
+
+CREATE TABLE IF NOT EXISTS exams (
+  id SERIAL PRIMARY KEY,
+  course_id INTEGER NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  prompt TEXT NOT NULL DEFAULT '',
+  model_answer TEXT,
+  semester TEXT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS results (
+  id SERIAL PRIMARY KEY,
+  student_id INTEGER NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+  exam_id INTEGER NOT NULL REFERENCES exams(id) ON DELETE CASCADE,
+  score DOUBLE PRECISION NOT NULL,
+  grade TEXT NOT NULL,
+  feedback TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS reports (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  payload JSONB NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);

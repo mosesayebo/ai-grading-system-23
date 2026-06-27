@@ -5,8 +5,8 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom: 18 }}>
-        <div style={{ width:48, height:48, borderRadius:8, background:'#fff', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <img src="/logo192.png" alt="LCU" style={{ width:36, height:36 }} />
+        <div style={{ width:48, height:48, borderRadius:8, background:'#fff', color:'#003366', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800 }}>
+          LCU
         </div>
         <div>
           <div style={{ fontWeight:700 }}>Lead City University</div>
@@ -26,7 +26,7 @@ export default function Sidebar() {
       </nav>
 
       <div style={{ marginTop: 24 }}>
-        <button className="btn secondary" style={{ width:'100%' }}>New Exam</button>
+        <NavLink to="/upload" className="btn secondary" style={{ width:'100%', display:'block', textAlign:'center', textDecoration:'none' }}>New Exam</NavLink>
       </div>
     </aside>
   );

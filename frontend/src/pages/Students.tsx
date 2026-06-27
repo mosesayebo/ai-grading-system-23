@@ -9,7 +9,9 @@ export default function StudentsPage() {
   const [form, setForm] = useState({ name:'', matric:'', department:'', level:'100', email:'' });
 
   const load = () => api.get('/students').then(r => setStudents(r.data));
-  useEffect(() => load(), []);
+  useEffect(() => {
+    load();
+  }, []);
 
   function openNew() { setEditing(null); setForm({ name:'', matric:'', department:'', level:'100', email:'' }); (document.getElementById('student-modal') as HTMLDialogElement)?.showModal(); }
   function openEdit(s: Student) { setEditing(s); setForm({ name:s.name, matric:s.matric, department:s.department, level:(s.level||'100'), email:(s.email||'') }); (document.getElementById('student-modal') as HTMLDialogElement)?.showModal(); }
