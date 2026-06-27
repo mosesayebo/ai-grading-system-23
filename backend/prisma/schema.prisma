@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["clientExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id         Int      @id @default(autoincrement())
+  matric     String   @unique
+  name       String
+  department String
+  email      String? 
+  level      String? 
+  results    Result[]
+  createdAt  DateTime @default(now())
+}
+
+model Lecturer {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  department String
+  courses   Course[]
+  createdAt DateTime @default(now())
+}
+
+model Course {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  title     String
+  credits   Int
+  lecturer  Lecturer? @relation(fields: [lecturerId], references: [id])
+  lecturerId Int?
+  semester  String? 
+  exams     Exam[]
+}
+
+model Exam {
+  id          Int      @id @default(autoincrement())
+  course      Course   @relation(fields: [courseId], references: [id])
+  courseId    Int
+  title       String
+  prompt      String
+  modelAnswer String?
+  semester    String?
+  createdAt   DateTime @default(now())
+  results     Result[]
+}
+
+model Result {
+  id         Int      @id @default(autoincrement())
+  student    Student  @relation(fields: [studentId], references: [id])
+  studentId  Int
+  exam       Exam     @relation(fields: [examId], references: [id])
+  examId     Int
+  score      Float
+  grade      String
+  feedback   String
+  createdAt  DateTime @default(now())
+}
+
+model Report {
+  id        Int      @id @default(autoincrement())
+  name      String
+  payload   Json
+  createdAt DateTime @default(now())
+}
